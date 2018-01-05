@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerController : MonoBehaviour {
-
+    private OOBChecker PlayerOOB;
     public float speedRotate;
     public float speedMove;
     public float hoverSpeed;
@@ -12,13 +11,16 @@ public class PlayerController : MonoBehaviour {
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        
+        PlayerOOB = gameObject.AddComponent<OOBChecker>();
     }
     void FixedUpdate()
     {
+        float posX = transform.position.x;
+        float posY = transform.position.y;
+        float posZ = transform.position.z;
+        //Kontrole
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            rb2D.AddForce(transform.up * hoverSpeed);
             transform.position += transform.up * speedMove * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -33,5 +35,10 @@ public class PlayerController : MonoBehaviour {
         {
             hoverSpeed = 0.1f;
         }
+        //V vsakem primeru se premikam malo nazaj cuz space
+        transform.position -= transform.up * hoverSpeed * Time.deltaTime;
+        //Preverim ali je igralec zapustil območje kamere
+        PlayerOOB.checkIfOOB(posX, posY, posZ);
     }
 }
+
