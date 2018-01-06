@@ -12,19 +12,19 @@ public class OOBChecker : MonoBehaviour {
         float xMin = -Camera.main.orthographicSize * Screen.width / Screen.height;
         if (x > xMax)
         {
-            transform.position += new Vector3(-x * 2, 0, 0);
+            transform.position += new Vector3(-xMax * 2, 0, 0);
         }
         else if (x < xMin)
         {
-            transform.position -= new Vector3(x * 2, 0, 0);
+            transform.position += new Vector3(xMax * 2 , 0, 0);
         }
         else if (y > yMax)
         {
-            transform.position += new Vector3(0, -y * 2, 0);
+            transform.position += new Vector3(0, -yMax * 2, 0);
         }
         else if (y < yMin)
         {
-            transform.position -= new Vector3(0, y * 2, 0);
+            transform.position += new Vector3(0, yMax * 2, 0);
         }
     }
 }

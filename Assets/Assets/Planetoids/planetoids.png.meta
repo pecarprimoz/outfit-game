@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: bc086718350491b45aacb034ffc6ac19
-timeCreated: 1515169301
+timeCreated: 1515247250
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -40,6 +40,7 @@ TextureImporter:
     21300066: planetoids_33
     21300068: planetoids_34
     21300070: planetoids_35
+    21300072: planetoids_36
   externalObjects: {}
   serializedVersion: 4
   mipmaps:

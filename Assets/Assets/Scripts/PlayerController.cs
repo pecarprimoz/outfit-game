@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        PlayerOOB = gameObject.AddComponent<OOBChecker>();
+        PlayerOOB = GetComponent<OOBChecker>();
     }
     void FixedUpdate()
     {
