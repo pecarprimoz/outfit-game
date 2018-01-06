@@ -3,26 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BackgroundInf : MonoBehaviour {
-
-    private BoxCollider2D backCollider;
-    private float backHorizontalLength;
-	void Start () {
-        backCollider = GetComponent<BoxCollider2D>();
-        backHorizontalLength = backCollider.size.x;
-	}
+    private Vector2 dimensions;
+    private SpriteRenderer sr;
+    void Start ()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        dimensions = sr.size;
+    }
 	
-	// Update is called once per frame
 	void Update () {
-		if(transform.position.x < -backHorizontalLength)
+        if(transform.position.x < -dimensions.x)
         {
-            RepositionBackground();
+            Vector3 tmp = transform.position;
+            tmp.x = -tmp.x;
+            transform.position = tmp;
         }
 	}
-
-    private void RepositionBackground()
-    {
-        Vector2 backOffset = new Vector2(backHorizontalLength * 2f, 0);
-        transform.position = (Vector2)transform.position + backOffset;
-    }
-
 }

@@ -12,23 +12,12 @@ public class GameController : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-        asteroid = GameObject.Find("Asteroid");
-        asteroid2 = GameObject.Find("Asteroid2");
-        asteroid3 = GameObject.Find("Asteroid3");
-
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 2; i++)
         {
             Instantiate(asteroid);
-        }
-        for (int i = 0; i < 1; i++)
-        {
             Instantiate(asteroid2);
-        }
-        for (int i = 0; i < 1; i++)
-        {
             Instantiate(asteroid3);
         }
-
         if (instance == null)
         {
             instance = this;
@@ -43,4 +32,5 @@ public class GameController : MonoBehaviour {
 	void Update ()
     {
 	}
+
 }

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ScrollingBackground : MonoBehaviour {
 
-    private Rigidbody2D rb2D;
     public float scrollSpeed;
+
+    void Start()
+    {
+    }
     void FixedUpdate()
     {
-        rb2D = GetComponent<Rigidbody2D>();
-        rb2D.velocity = new Vector2(scrollSpeed, 0);
-    }
-
-    void Update()
-    {
+        Vector3 temp = transform.position;
+        temp.x -= Time.deltaTime*scrollSpeed;
+        transform.position = temp;
     }
 }
