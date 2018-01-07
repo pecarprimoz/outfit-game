@@ -5,9 +5,7 @@ using UnityEngine;
 public class ProjectileCollision : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-		
-	}
+	
     
     void OnCollisionEnter2D(Collision2D col)
     {

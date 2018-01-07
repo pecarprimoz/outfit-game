@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class AsteroidController : MonoBehaviour {
 
-    public int asteroidExplode;
+    private int asteroidExplode;
     private OOBChecker asteroidOOB;
     private float asteroidSpeed;
     public Rigidbody2D rb2D;
     private float asteroidSize;
+
     void Start () {
         asteroidSize = Random.Range(0.3f, 1);
         if(asteroidSize>0.7 && asteroidSize <= 1)
@@ -19,7 +20,7 @@ public class AsteroidController : MonoBehaviour {
         {
             asteroidExplode = 1;
         }
-        else if (asteroidSize > 0.3 && asteroidSize <= 0.5)
+        else if (asteroidSize <= 0.5)
         {
             asteroidExplode = 0;
         }
@@ -43,8 +44,10 @@ public class AsteroidController : MonoBehaviour {
     }
     public void HandleAsteroidExplosion()
     {
-        asteroidExplode--;
-        if (asteroidExplode > 0)
+        this.asteroidExplode--;
+        this.asteroidSize -= 0.2f;
+        transform.localScale = new Vector3(asteroidSize, asteroidSize, 0);
+        if (this.asteroidExplode > 0)
         {
             Instantiate(this);
             Instantiate(this);

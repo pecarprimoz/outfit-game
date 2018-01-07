@@ -9,13 +9,27 @@ public class PlayerController : MonoBehaviour
     public float hoverSpeed;
     private Rigidbody2D rb2D;
     public GameObject bulletPrefab;
+    public GameObject explosionPrefab;
     private Transform bulletSpawn;
-    private float fireRate = 0.01f;
+    private float fireRate = 0.2f;
     public float timeSinceShot = 0.0f;
+    private int playerHP;
+
+    public int getPlayerHP()
+    {
+        return playerHP;
+    }
+    public void reduceHP()
+    {
+        playerHP--;
+    }
+    public void setPlayerHP(int num)
+    {
+        playerHP = num;
+    }
 
     void Start()
     {
-        
         rb2D = GetComponent<Rigidbody2D>();
         bulletSpawn = rb2D.transform;
         PlayerOOB = GetComponent<OOBChecker>();
@@ -60,10 +74,20 @@ public class PlayerController : MonoBehaviour
             bulletSpawn.position,
             bulletSpawn.rotation
             );
+        Physics2D.IgnoreCollision(bullet.GetComponent<CircleCollider2D>(), GetComponent<BoxCollider2D>());
         bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * 6;
-
         Destroy(bullet, 3.0f);
     }
-    
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Planet")
+        {
+            Instantiate(explosionPrefab,this.transform.position,this.transform.rotation);
+            Destroy(col.gameObject);
+            Destroy(gameObject);
+            GameController.instance.HandlePlayerRespawn();
+        }
+
+    }
 }
 
