@@ -62,6 +62,7 @@
     <Compile Include="Assets\Assets\Scripts\ProjectileCollision.cs" />
     <Compile Include="Assets\Assets\Scripts\ScrollingBackground.cs" />
     <Compile Include="Assets\Assets\Scripts\StartButton.cs" />
+    <Compile Include="Assets\Assets\Scripts\PickupController.cs" />
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>

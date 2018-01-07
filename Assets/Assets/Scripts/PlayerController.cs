@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject explosionPrefab;
     private Transform bulletSpawn;
-    private float fireRate = 0.2f;
+    private float fireRate = 0.01f;
     public float timeSinceShot = 0.0f;
     private int playerHP;
 
@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.S) && Time.time > timeSinceShot)
         {
+            this.GetComponent<BoxCollider2D>().enabled = true;
             timeSinceShot = Time.time + fireRate;
             Fire();
         }

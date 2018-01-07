@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Planet
+  - HP
+  - Projectile
   layers:
   - Default
   - TransparentFX

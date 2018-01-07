@@ -14,6 +14,8 @@ public class ProjectileCollision : MonoBehaviour {
             GameObject planet = col.gameObject;
             AsteroidController ac = planet.GetComponent<AsteroidController>();
             ac.HandleAsteroidExplosion();
+            GameController gc = GameController.instance;
+            gc.IncrementScore();
             Destroy(col.gameObject);
             Destroy(gameObject);
         }
