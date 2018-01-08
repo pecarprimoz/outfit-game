@@ -14,8 +14,12 @@ public class PickupController : MonoBehaviour {
         {
             Physics2D.IgnoreCollision(col.gameObject.GetComponent<CircleCollider2D>(), GetComponent<CircleCollider2D>());
         }
+        if (col.gameObject.tag == "Enemy")
+        {
+            Physics2D.IgnoreCollision(col.gameObject.GetComponent<CircleCollider2D>(), GetComponent<CircleCollider2D>());
+        }
         //Does not work, try to figure out why
-        else if(col.gameObject.tag == "Projectile")
+        if(col.gameObject.tag == "Projectile")
         {
             Physics2D.IgnoreCollision(col.gameObject.GetComponent<CircleCollider2D>(), GetComponent<CircleCollider2D>());
         }
@@ -23,6 +27,7 @@ public class PickupController : MonoBehaviour {
         if(col.gameObject.tag == "Player")
         {
             GameController gc = GameController.instance;
+            gc.PlayPickupSound();
             gc.IncrementHP();
             Destroy(gameObject);
         }

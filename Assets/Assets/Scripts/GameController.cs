@@ -14,14 +14,22 @@ public class GameController : MonoBehaviour {
     private int GCWave;
     private int GCScore;
     private int numberOfAsteroids;
+    private GameObject inputField;
+    private GameObject buttonEnter;
     public GameObject asteroid;
     public GameObject asteroid2;
     public GameObject asteroid3;
     public GameObject player;
     public GameObject PickupHP;
+    public GameObject enemy;
+    private DataController dataController;
     private GameObject temporaryPickup;
     private int pickupExists;
 
+    private AudioSource audioSource;
+    public AudioClip soundExplode;
+    public AudioClip soundPickup;
+    
     public void IncrementHP()
     {
         //To bi bilo dobro prepisati v increment/decrement
@@ -52,10 +60,18 @@ public class GameController : MonoBehaviour {
         waveText = GameObject.Find("WaveInt").GetComponent<Text>();
         scoreText = GameObject.Find("ScoreInt").GetComponent<Text>();
         lostText = GameObject.Find("Lost").GetComponent<Text>();
+        inputField = GameObject.Find("InputField");
+        buttonEnter = GameObject.Find("EnterHS");
+        buttonEnter.SetActive(false);
+        buttonEnter.GetComponent<Button>().onClick.AddListener(HandleData);
+        inputField.SetActive(false);
         GCWave = 1;
+        dataController = GetComponent<DataController>();
         GCPlayerHP = 3;
         GCScore = 0;
         pickupExists = -1;
+
+        audioSource = GetComponent<AudioSource>();
 
         playerHPText.text = player.GetComponent<PlayerController>().getPlayerHP().ToString();
         scoreText.text = GCScore.ToString();
@@ -75,6 +91,12 @@ public class GameController : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+    void HandleData()
+    {
+        Destroy(buttonEnter);
+        dataController.WriteScores(inputField.GetComponent<InputField>().text,GCScore);
+    }
+
     void Update()
     {
         if (GameObject.FindGameObjectsWithTag("Planet").Length == 0)
@@ -98,11 +120,18 @@ public class GameController : MonoBehaviour {
         {
             MakeANewRock();
         }
+        if(GCWave%3==0 && GameObject.FindGameObjectWithTag("Enemy") == null)
+        {
+            Instantiate(enemy);
+        }
         waveText.text = GCWave.ToString();
     }
     void FinishGame()
     {
         lostText.text = "YOU LOST";
+        inputField.SetActive(true);
+        if(buttonEnter!=null)
+            buttonEnter.SetActive(true);
     }
     public void HandlePlayerRespawn()
     {
@@ -116,6 +145,9 @@ public class GameController : MonoBehaviour {
         {
             GameObject pc = Instantiate(player, new Vector3(0, 0, -2), player.transform.rotation);
             pc.GetComponent<BoxCollider2D>().enabled = false;
+            if (GameObject.FindGameObjectWithTag("Enemy") != null) { 
+                GameObject.FindGameObjectWithTag("Enemy").GetComponent<AIController>().UpdatePlayerObject();
+            }
         }
     }
     
@@ -164,5 +196,13 @@ public class GameController : MonoBehaviour {
         {
             Destroy(PickupHP);
         }
+    }
+    public void PlayExplosionSound()
+    {
+        audioSource.PlayOneShot(soundExplode, 1.0f);
+    }
+    public void PlayPickupSound()
+    {
+        audioSource.PlayOneShot(soundPickup, 1.0f);
     }
 }

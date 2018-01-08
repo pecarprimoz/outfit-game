@@ -10,10 +10,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2D;
     public GameObject bulletPrefab;
     public GameObject explosionPrefab;
+    public AudioClip audioShoot;
+    private AudioSource audioSource;
     private Transform bulletSpawn;
     private float fireRate = 0.01f;
     public float timeSinceShot = 0.0f;
     private int playerHP;
+    
+
 
     public int getPlayerHP()
     {
@@ -30,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         rb2D = GetComponent<Rigidbody2D>();
         bulletSpawn = rb2D.transform;
         PlayerOOB = GetComponent<OOBChecker>();
@@ -70,6 +75,7 @@ public class PlayerController : MonoBehaviour
     }
     void Fire()
     {
+        audioSource.PlayOneShot(audioShoot,1.0f);
         var bullet = (GameObject)Instantiate(
             bulletPrefab,
             bulletSpawn.position,
@@ -81,14 +87,31 @@ public class PlayerController : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
+        GameController gc = GameController.instance;
         if (col.gameObject.tag == "Planet")
         {
+            gc.PlayExplosionSound();
             Instantiate(explosionPrefab,this.transform.position,this.transform.rotation);
             Destroy(col.gameObject);
             Destroy(gameObject);
             GameController.instance.HandlePlayerRespawn();
         }
-
+        if(col.gameObject.tag == "ProjEnemy")
+        {
+            gc.PlayExplosionSound();
+            Instantiate(explosionPrefab, this.transform.position, this.transform.rotation);
+            Destroy(col.gameObject);
+            Destroy(gameObject);
+            GameController.instance.HandlePlayerRespawn();
+        }
+        if (col.gameObject.tag == "Enemy")
+        {
+            gc.PlayExplosionSound();
+            Instantiate(explosionPrefab, this.transform.position, this.transform.rotation);
+            Destroy(col.gameObject);
+            Destroy(gameObject);
+            GameController.instance.HandlePlayerRespawn();
+        }
     }
 }
 

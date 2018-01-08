@@ -12,15 +12,15 @@ public class AsteroidController : MonoBehaviour {
 
     void Start () {
         asteroidSize = Random.Range(0.3f, 1);
-        if(asteroidSize>0.7 && asteroidSize <= 1)
+        if(asteroidSize>0.8 && asteroidSize <= 1)
         {
             asteroidExplode = 2;
         }
-        else if (asteroidSize > 0.5 && asteroidSize <= 0.7)
+        else if (asteroidSize > 0.7 && asteroidSize <= 0.8)
         {
             asteroidExplode = 1;
         }
-        else if (asteroidSize <= 0.5)
+        else if (asteroidSize <= 0.7)
         {
             asteroidExplode = 0;
         }
