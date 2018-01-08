@@ -16,6 +16,7 @@ public class ProjectileCollision : MonoBehaviour {
             ac.HandleAsteroidExplosion();
             GameController gc = GameController.instance;
             gc.IncrementScore();
+            gc.PlayAsteroidExplosionSound();
             Instantiate(explosionPrefab, this.transform.position, this.transform.rotation);
             Destroy(col.gameObject);
             Destroy(gameObject);

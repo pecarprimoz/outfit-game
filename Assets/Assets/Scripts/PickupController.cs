@@ -28,7 +28,14 @@ public class PickupController : MonoBehaviour {
         {
             GameController gc = GameController.instance;
             gc.PlayPickupSound();
-            gc.IncrementHP();
+            if(gameObject.tag == "HP")
+            {
+                gc.IncrementHP();
+            }
+            else if (gameObject.tag == "FireRate")
+            {
+                gc.ReduceFireRate();
+            }
             Destroy(gameObject);
         }
     }

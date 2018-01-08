@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Enemy
   - ProjEnemy
+  - FireRate
   layers:
   - Default
   - TransparentFX

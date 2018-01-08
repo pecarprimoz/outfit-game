@@ -17,7 +17,11 @@ public class PlayerController : MonoBehaviour
     public float timeSinceShot = 0.0f;
     private int playerHP;
     
-
+    public void reduceFireRate()
+    {
+        if(fireRate>0.1f)
+            fireRate -= 0.1f;
+    }
 
     public int getPlayerHP()
     {
@@ -61,6 +65,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.S) && Time.time > timeSinceShot)
         {
             this.GetComponent<BoxCollider2D>().enabled = true;
+            this.GetComponent<SpriteRenderer>().color = Color.white;
             timeSinceShot = Time.time + fireRate;
             Fire();
         }
@@ -72,6 +77,7 @@ public class PlayerController : MonoBehaviour
         transform.position -= transform.up * hoverSpeed * Time.deltaTime;
         //Preverim ali je igralec zapustil območje kamere
         PlayerOOB.checkIfOOB(posX, posY, posZ);
+
     }
     void Fire()
     {

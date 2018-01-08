@@ -21,15 +21,18 @@ public class GameController : MonoBehaviour {
     public GameObject asteroid3;
     public GameObject player;
     public GameObject PickupHP;
+    public GameObject PickupFireRate;
     public GameObject enemy;
     private DataController dataController;
-    private GameObject temporaryPickup;
+    private GameObject temporaryPickupHP;
+    private GameObject temporaryPickupDPS;
     private int pickupExists;
 
     private AudioSource audioSource;
     public AudioClip soundExplode;
     public AudioClip soundPickup;
-    
+    public AudioClip soundAsteroidExplode;
+
     public void IncrementHP()
     {
         //To bi bilo dobro prepisati v increment/decrement
@@ -37,6 +40,11 @@ public class GameController : MonoBehaviour {
             .setPlayerHP(player.GetComponent<PlayerController>()
             .getPlayerHP() + 1);
         playerHPText.text = player.GetComponent<PlayerController>().getPlayerHP().ToString();
+    }
+    public void ReduceFireRate()
+    {
+        player.GetComponent<PlayerController>()
+            .reduceFireRate();
     }
     public void IncrementScore()
     {
@@ -55,7 +63,8 @@ public class GameController : MonoBehaviour {
 
     void Awake()
     {
-        temporaryPickup = PickupHP;
+        temporaryPickupHP = PickupHP;
+        temporaryPickupDPS = PickupFireRate;
         playerHPText = GameObject.Find("HPInt").GetComponent<Text>();
         waveText = GameObject.Find("WaveInt").GetComponent<Text>();
         scoreText = GameObject.Find("ScoreInt").GetComponent<Text>();
@@ -94,7 +103,7 @@ public class GameController : MonoBehaviour {
     void HandleData()
     {
         Destroy(buttonEnter);
-        dataController.WriteScores(inputField.GetComponent<InputField>().text,GCScore);
+        dataController.WriteScores(inputField.GetComponent<InputField>().text, GCScore);
     }
 
     void Update()
@@ -107,7 +116,7 @@ public class GameController : MonoBehaviour {
         {
             FinishGame();
         }
-        if (GCWave % 2 == 0 && pickupExists==-1)
+        if (GCWave % 2 == 0 && pickupExists == -1)
         {
             GeneratePickup();
         }
@@ -120,17 +129,15 @@ public class GameController : MonoBehaviour {
         {
             MakeANewRock();
         }
-        if(GCWave%3==0 && GameObject.FindGameObjectWithTag("Enemy") == null)
-        {
-            Instantiate(enemy);
-        }
+        GenerateNewEnemy();
+        GenerateNewEnemy();
         waveText.text = GCWave.ToString();
     }
     void FinishGame()
     {
         lostText.text = "YOU LOST";
         inputField.SetActive(true);
-        if(buttonEnter!=null)
+        if (buttonEnter != null)
             buttonEnter.SetActive(true);
     }
     public void HandlePlayerRespawn()
@@ -145,12 +152,13 @@ public class GameController : MonoBehaviour {
         {
             GameObject pc = Instantiate(player, new Vector3(0, 0, -2), player.transform.rotation);
             pc.GetComponent<BoxCollider2D>().enabled = false;
-            if (GameObject.FindGameObjectWithTag("Enemy") != null) { 
+            pc.GetComponent<SpriteRenderer>().color = Color.magenta;
+            if (GameObject.FindGameObjectWithTag("Enemy") != null) {
                 GameObject.FindGameObjectWithTag("Enemy").GetComponent<AIController>().UpdatePlayerObject();
             }
         }
     }
-    
+
     void MakeANewRock()
     {
         int r = Random.Range(1, 4);
@@ -179,15 +187,19 @@ public class GameController : MonoBehaviour {
         Camera cam = Camera.main;
         float height = 2f * cam.orthographicSize / 2;
         float width = height * cam.aspect / 2;
-        
-        float xPos = Random.Range(0.33f, width-0.33f);
-        float yPos = Random.Range(0.33f, height-0.33f);
 
-        int typeOfPickup = Random.Range(1, 1);
+        float xPos = Random.Range(0.33f, width - 0.33f);
+        float yPos = Random.Range(0.33f, height - 0.33f);
 
+        int typeOfPickup = Random.Range(1, 3);
         if (typeOfPickup == 1) {
-            PickupHP = Instantiate(temporaryPickup, new Vector3(xPos, yPos, -2), temporaryPickup.transform.rotation);
+            PickupHP = Instantiate(temporaryPickupHP, new Vector3(xPos, yPos, -2), temporaryPickupHP.transform.rotation);
             pickupExists = 1;
+        }
+        else if (typeOfPickup == 2)
+        {
+            PickupFireRate = Instantiate(temporaryPickupDPS, new Vector3(xPos, yPos, -2), temporaryPickupDPS.transform.rotation);
+            pickupExists = 2;
         }
         Invoke("DestroyPickup", 5.0f);
     }
@@ -195,6 +207,10 @@ public class GameController : MonoBehaviour {
         if (pickupExists == 1)
         {
             Destroy(PickupHP);
+        }
+        else if (pickupExists == 2)
+        {
+            Destroy(PickupFireRate);
         }
     }
     public void PlayExplosionSound()
@@ -205,4 +221,21 @@ public class GameController : MonoBehaviour {
     {
         audioSource.PlayOneShot(soundPickup, 1.0f);
     }
+    public void PlayAsteroidExplosionSound()
+    {
+        audioSource.PlayOneShot(soundAsteroidExplode);
+    }
+    void GenerateNewEnemy()
+    {
+        // && GameObject.FindGameObjectWithTag("Enemy") == null
+        if (GCWave % 3 == 0)
+        {
+            Vector3 randomStart = enemy.transform.position;
+            int r = Random.Range(1, 3);
+            if (r == 1)
+                randomStart.x = randomStart.x * -1.0f;
+            Instantiate(enemy, randomStart, enemy.transform.rotation);
+        }
+    }
+    
 }
