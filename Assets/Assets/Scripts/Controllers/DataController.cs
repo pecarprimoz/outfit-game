@@ -6,7 +6,16 @@ using UnityEngine;
 public class DataController : MonoBehaviour {
     
     //Fixed path, save scores in assets
-    private string Path = "Assets/Assets/Scores/score";
+    private string Path = "score";
+    void Awake()
+    {
+        if (!File.Exists("score"))
+        {
+            System.IO.FileStream oFileStream = null;
+            oFileStream = new System.IO.FileStream("score", System.IO.FileMode.Create);
+            oFileStream.Close();
+        }
+    }
 
     //Simple script to save scores
     public void WriteScores(string name, int score)

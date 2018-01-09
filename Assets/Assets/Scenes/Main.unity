@@ -1132,6 +1132,7 @@ MonoBehaviour:
   soundPickup: {fileID: 8300000, guid: e3651ebd1c9b2224c864fecde6f4ff2f, type: 3}
   soundAsteroidExplode: {fileID: 8300000, guid: 8306b494488dfac4c9e348807213fb64,
     type: 3}
+  soundPlayMusic: {fileID: 8300000, guid: adebe74c4338e254581f71cb9d5547df, type: 3}
 --- !u!4 &829443562
 Transform:
   m_ObjectHideFlags: 0

@@ -403,7 +403,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "Aleksander Kowalczyk, Retrocade.net - Enemy, Projectiles\n\nHansj\xF6rg
     Malthaner - Planetoids \n\nLuminousDragonGames - Background\n\nashishlko11 - Explosion\n\n\n\nAssets
-    can be found on OpenGameArt.org"
+    can be found on OpenGameArt.org\n\nMusic by: Vito Bo\u0161njak \n(luda huna@soundcloud)"
 --- !u!222 &958442457
 CanvasRenderer:
   m_ObjectHideFlags: 0

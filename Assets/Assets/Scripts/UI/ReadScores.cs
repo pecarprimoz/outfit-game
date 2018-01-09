@@ -11,8 +11,13 @@ public class ReadScores : MonoBehaviour {
     private Text text;
     private string Path;
 
-    void Awake () {
-        Path = "Assets/Assets/Scores/score";
+    void Awake () {;
+        if (!File.Exists("score")) { 
+            System.IO.FileStream oFileStream = null;
+            oFileStream = new System.IO.FileStream("score", System.IO.FileMode.Create);
+            oFileStream.Close();
+        }
+        Path = "score";
         text = GetComponent<Text>();
         SetHighScores();
     }

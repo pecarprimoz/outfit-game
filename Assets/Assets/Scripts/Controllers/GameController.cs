@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour {
     public AudioClip soundExplode;
     public AudioClip soundPickup;
     public AudioClip soundAsteroidExplode;
+    public AudioClip soundPlayMusic;
 
     //Increments HP when player picks up PickupHP
     public void IncrementHP()
@@ -118,7 +119,7 @@ public class GameController : MonoBehaviour {
         pickupExists = -1;
 
         audioSource = GetComponent<AudioSource>();
-
+        audioSource.PlayOneShot(soundPlayMusic, 1.0f);
         //Set the initial values of UI elements, based on GCVars
         playerHPText.text = player.GetComponent<PlayerController>().getPlayerHP().ToString();
         scoreText.text = GCScore.ToString();
