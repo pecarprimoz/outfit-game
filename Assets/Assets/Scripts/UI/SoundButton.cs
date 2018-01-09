@@ -7,6 +7,11 @@ public class SoundButton : MonoBehaviour {
 
 	// Use this for initialization 
 	void Start () {
+        if(PlayerPrefs.GetString("sound").Length<1)
+        {
+            PlayerPrefs.SetString("sound", "on");
+            PlayerPrefs.Save();
+        }
         if (PlayerPrefs.GetString("sound").Equals("on"))
         {
             GetComponent<Button>().GetComponent<Image>().color = Color.red;
@@ -15,6 +20,7 @@ public class SoundButton : MonoBehaviour {
         {
             GetComponent<Button>().GetComponent<Image>().color = Color.white;
         }
+
             GetComponent<Button>().onClick.AddListener(VolumePreset);
     }
 
