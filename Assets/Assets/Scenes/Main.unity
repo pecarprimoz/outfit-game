@@ -1124,10 +1124,10 @@ MonoBehaviour:
   asteroid2: {fileID: 1977072346241004, guid: 7f636ed0d97112b4ca2f8acf40fffc2a, type: 2}
   asteroid3: {fileID: 1050594113423484, guid: e8002cb227e6a5c4cbea491081a1657a, type: 2}
   player: {fileID: 1886770247395344, guid: 85bb6f3110f4b6c44a1be1567a6e1b7d, type: 2}
+  enemy: {fileID: 1645901865721182, guid: f79a79d84c583af43b0d468564b438ad, type: 2}
   PickupHP: {fileID: 1063050724191132, guid: 0677b7abcbdb6214296c26f2ef0f7873, type: 2}
   PickupFireRate: {fileID: 1884455050390770, guid: 49741d7b632d84f44acfe97cad3fd800,
     type: 2}
-  enemy: {fileID: 1645901865721182, guid: f79a79d84c583af43b0d468564b438ad, type: 2}
   soundExplode: {fileID: 8300000, guid: ab4f07b1eee9b8d4baf7d3c2c16073a6, type: 3}
   soundPickup: {fileID: 8300000, guid: e3651ebd1c9b2224c864fecde6f4ff2f, type: 3}
   soundAsteroidExplode: {fileID: 8300000, guid: 8306b494488dfac4c9e348807213fb64,
@@ -1139,7 +1139,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 829443560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1580831, y: 1.3148828, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2079,6 +2079,26 @@ Prefab:
         type: 2}
       propertyPath: m_DrawMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198246828781539880, guid: 85bb6f3110f4b6c44a1be1567a6e1b7d,
+        type: 2}
+      propertyPath: SubModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198246828781539880, guid: 85bb6f3110f4b6c44a1be1567a6e1b7d,
+        type: 2}
+      propertyPath: randomSeed
+      value: 2071472222
+      objectReference: {fileID: 0}
+    - target: {fileID: 198693445085632116, guid: 85bb6f3110f4b6c44a1be1567a6e1b7d,
+        type: 2}
+      propertyPath: randomSeed
+      value: -1058544672
+      objectReference: {fileID: 0}
+    - target: {fileID: 198693445085632116, guid: 85bb6f3110f4b6c44a1be1567a6e1b7d,
+        type: 2}
+      propertyPath: SubModule.enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 85bb6f3110f4b6c44a1be1567a6e1b7d, type: 2}

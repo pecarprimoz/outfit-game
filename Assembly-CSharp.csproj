@@ -51,23 +51,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Assets\Scripts\AIController.cs" />
-     <Compile Include="Assets\Assets\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\Assets\Scripts\AutoDestroy.cs" />
-     <Compile Include="Assets\Assets\Scripts\BackgroundInf.cs" />
-     <Compile Include="Assets\Assets\Scripts\ButtonBack.cs" />
-     <Compile Include="Assets\Assets\Scripts\DataController.cs" />
-     <Compile Include="Assets\Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Assets\Scripts\Background\BackgroundInf.cs" />
+     <Compile Include="Assets\Assets\Scripts\Background\ScrollingBackground.cs" />
+     <Compile Include="Assets\Assets\Scripts\Controllers\AIController.cs" />
+     <Compile Include="Assets\Assets\Scripts\Controllers\AsteroidController.cs" />
+     <Compile Include="Assets\Assets\Scripts\Controllers\DataController.cs" />
+     <Compile Include="Assets\Assets\Scripts\Controllers\GameController.cs" />
+     <Compile Include="Assets\Assets\Scripts\Controllers\PickupController.cs" />
+     <Compile Include="Assets\Assets\Scripts\Controllers\PlayerController.cs" />
+     <Compile Include="Assets\Assets\Scripts\Controllers\ProjectileCollision.cs" />
      <Compile Include="Assets\Assets\Scripts\OOBChecker.cs" />
-     <Compile Include="Assets\Assets\Scripts\OptionsButton.cs" />
-     <Compile Include="Assets\Assets\Scripts\PickupController.cs" />
-     <Compile Include="Assets\Assets\Scripts\PlayerController.cs" />
-     <Compile Include="Assets\Assets\Scripts\ProjectileCollision.cs" />
-     <Compile Include="Assets\Assets\Scripts\QuitButton.cs" />
-     <Compile Include="Assets\Assets\Scripts\ScoreButton.cs" />
-     <Compile Include="Assets\Assets\Scripts\ScrollingBackground.cs" />
-     <Compile Include="Assets\Assets\Scripts\StartButton.cs" />
-     <Compile Include="Assets\ReadScores.cs" />
+     <Compile Include="Assets\Assets\Scripts\UI\ButtonBack.cs" />
+     <Compile Include="Assets\Assets\Scripts\UI\CreditsButton.cs" />
+     <Compile Include="Assets\Assets\Scripts\UI\OptionsButton.cs" />
+     <Compile Include="Assets\Assets\Scripts\UI\QuitButton.cs" />
+     <Compile Include="Assets\Assets\Scripts\UI\ReadScores.cs" />
+     <Compile Include="Assets\Assets\Scripts\UI\ScoreButton.cs" />
+     <Compile Include="Assets\Assets\Scripts\UI\SoundButton.cs" />
+     <Compile Include="Assets\Assets\Scripts\UI\StartButton.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
