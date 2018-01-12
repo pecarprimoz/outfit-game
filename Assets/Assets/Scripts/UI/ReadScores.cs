@@ -11,7 +11,7 @@ public class ReadScores : MonoBehaviour {
     private Text text;
     private string Path;
 
-    void Awake () {;
+    void Awake () {
         if (!File.Exists("score")) { 
             System.IO.FileStream oFileStream = null;
             oFileStream = new System.IO.FileStream("score", System.IO.FileMode.Create);

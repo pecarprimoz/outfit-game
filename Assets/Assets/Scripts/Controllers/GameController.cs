@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
     public static GameController instance;
 
     //Variables for UI/scoring elements
+    public GameObject pauseMenu;
     private Text playerHPText;
     private Text waveText;
     private Text scoreText;
@@ -19,6 +20,7 @@ public class GameController : MonoBehaviour {
     private int numberOfAsteroids;
     private GameObject inputField;
     private GameObject buttonEnter;
+    private bool isMenuOpen;
 
     //Data controller to save score 
     private DataController dataController;
@@ -82,6 +84,7 @@ public class GameController : MonoBehaviour {
     //Awake function, used to set needed variables
     void Awake()
     {
+        Time.timeScale = 1;
         if (PlayerPrefs.GetString("sound").Equals("off"))
         {
             AudioListener.volume = 0.0f;
@@ -102,6 +105,7 @@ public class GameController : MonoBehaviour {
         lostText = GameObject.Find("Lost").GetComponent<Text>();
         inputField = GameObject.Find("InputField");
         buttonEnter = GameObject.Find("EnterHS");
+        isMenuOpen = false;
 
         //Turn off input field and button, used to get name of player
         //and save his score localy
@@ -153,6 +157,22 @@ public class GameController : MonoBehaviour {
     //if pickup needs to be created
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!isMenuOpen)
+            {
+                Time.timeScale = 0;
+                pauseMenu.SetActive(true);
+                isMenuOpen = true;
+            }
+            else
+            {
+                Time.timeScale = 1;
+                pauseMenu.SetActive(false);
+                isMenuOpen = false;
+            }
+        }
+
         if (GameObject.FindGameObjectsWithTag("Planet").Length == 0)
         {
             CreateNewWave();

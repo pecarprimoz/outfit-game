@@ -56,6 +56,8 @@ public class PlayerController : MonoBehaviour
         //Controls
         if (Input.GetKey(KeyCode.UpArrow))
         {
+            rb2D.velocity = Vector3.zero;
+            rb2D.angularVelocity = 0.0f;
             transform.position += transform.up * speedMove * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -76,6 +78,10 @@ public class PlayerController : MonoBehaviour
         if (hoverSpeed >= 0.1f)
         {
             hoverSpeed = 0.1f;
+        }
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            rb2D.AddForce(transform.up ,ForceMode2D.Impulse);
         }
         //We always float back because space
         transform.position -= transform.up * hoverSpeed * Time.deltaTime;
