@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour {
     public GameObject asteroid3;
     public GameObject player;
     public GameObject enemy;
+    public GameObject boss;
 
     //Variables for pickups
     public GameObject PickupHP;
@@ -193,15 +194,30 @@ public class GameController : MonoBehaviour {
     {
         pickupExists = -1;
         GCWave++;
-        for (int i = 0; i < GCWave; i++)
+        waveText.text = GCWave.ToString();
+        if (GCWave % 5 == 0 && GCWave % 10 !=0)
+        {
+            for(int i=0; i< GCWave / 2 ; i++)
+            {
+                MakeANewRock();
+                GenerateNewEnemy();
+            }
+        }
+        else if (GCWave % 10 == 0)
         {
             MakeANewRock();
+            GenerateNewBoss();
         }
-        if (GCWave % 3 == 0)
-        {
-            GenerateNewEnemy();
+        else if(GCWave % 5 !=0){ 
+            for (int i = 0; i < GCWave; i++)
+            {
+                MakeANewRock();
+            }
+            if (GCWave % 3 == 0)
+            {
+                GenerateNewEnemy();
+            }
         }
-        waveText.text = GCWave.ToString();
     }
 
     //Generate enemy, set starting position randomly
@@ -212,6 +228,14 @@ public class GameController : MonoBehaviour {
         if (r == 1)
             randomStart.x = randomStart.x * -1.0f;
         Instantiate(enemy, randomStart, enemy.transform.rotation);
+    }
+    void GenerateNewBoss()
+    {
+        Vector3 randomStart = boss.transform.position;
+        int r = Random.Range(1, 3);
+        if (r == 1)
+            randomStart.x = randomStart.x * -1.0f;
+        Instantiate(boss, randomStart, boss.transform.rotation);
     }
 
     //Finish game when playerHP == 0, display UI info
@@ -242,7 +266,14 @@ public class GameController : MonoBehaviour {
             pc.GetComponent<BoxCollider2D>().enabled = false;
             pc.GetComponent<SpriteRenderer>().color = Color.magenta;
             if (GameObject.FindGameObjectWithTag("Enemy") != null) {
-                GameObject.FindGameObjectWithTag("Enemy").GetComponent<AIController>().UpdatePlayerObject();
+                GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
+                for(int i=0; i < enemys.Length; i++)
+                {
+                    if(enemys[i].GetComponent<AIController>()  != null)
+                        enemys[i].GetComponent<AIController>().UpdatePlayerObject();
+                    else
+                        enemys[i].GetComponent<BOSSController>().UpdatePlayerObject();
+                }
             }
         }
     }

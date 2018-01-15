@@ -12,7 +12,7 @@ public class ScrollingBackground : MonoBehaviour {
     void FixedUpdate()
     {
         Vector3 temp = transform.position;
-        temp.x -= Time.deltaTime*scrollSpeed;
+        temp.x -= Time.deltaTime/3*scrollSpeed;
         transform.position = temp;
     }
 }

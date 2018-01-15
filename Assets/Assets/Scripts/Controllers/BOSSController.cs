@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIController : MonoBehaviour {
+public class BOSSController : MonoBehaviour
+{
 
     //Variables for enemy
     public GameObject projectileEnemy;
@@ -10,7 +11,7 @@ public class AIController : MonoBehaviour {
     private Vector3 destPosition;
     private float moveSpeed;
     private Transform bulletSpawn;
-    
+
     //Variables for player
     private GameObject playerClone;
     private Vector3 playerDirection;
@@ -32,9 +33,10 @@ public class AIController : MonoBehaviour {
     }
 
     //Initialiser
-    void Start () {
-        //AI can get hit 3 times before exploding
-        AIHP = 3;
+    void Start()
+    {
+        //BOSS can get hit 3 times before exploding
+        AIHP = 5;
 
         //Get player reference, set temp player direction
         playerClone = GameObject.FindGameObjectWithTag("Player");
@@ -52,12 +54,13 @@ public class AIController : MonoBehaviour {
         //Generate the first destenatin
         GenerateNewDest();
     }
-	
+
     //Enemy moves to the point picked in GenerateNewDest
     //when it reaches the point it shoots a projectile thorwards player
-	void Update () {
+    void Update()
+    {
         MoveToPoint();
-        if(transform.position.Equals(destPosition) && playerClone!=null)
+        if (transform.position.Equals(destPosition) && playerClone != null)
         {
             playerDirection = (playerClone.transform.position - this.transform.position).normalized;
             Shoot();
@@ -79,7 +82,7 @@ public class AIController : MonoBehaviour {
         bullet.GetComponent<Rigidbody2D>().velocity = playerDirection * 6;
         Destroy(bullet, 3.0f);
     }
-    
+
     //Generate a new destination based on game screen
     void GenerateNewDest()
     {
@@ -95,7 +98,7 @@ public class AIController : MonoBehaviour {
     void MoveToPoint()
     {
         float step = moveSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, destPosition, step);   
+        transform.position = Vector3.MoveTowards(transform.position, destPosition, step);
     }
 
     //Updated player reference if the player dies

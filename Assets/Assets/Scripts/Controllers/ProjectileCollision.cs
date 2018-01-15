@@ -26,16 +26,48 @@ public class ProjectileCollision : MonoBehaviour {
             GameController gc = GameController.instance;
             AIController enemyC = GameObject.FindGameObjectWithTag("Enemy").GetComponent<AIController>();
             gc.IncrementScore();
-            if (enemyC.getAIHP() > 0)
+            if (enemyC != null) { 
+                if (enemyC.getAIHP() > 0)
+                {
+                    enemyC.decrementHP();
+                }
+                else {
+                    Instantiate(explosionPrefab, this.transform.position, this.transform.rotation);
+                    gc.PlayExplosionSound();
+                    Destroy(col.gameObject);
+                }
+                Destroy(gameObject);
+            }
+            else
             {
-                enemyC.decrementHP();
+                BOSSController bc = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BOSSController>();
+                if (bc.getAIHP() > 0)
+                {
+                    bc.decrementHP();
+                }
+                else
+                {
+                    Instantiate(explosionPrefab, this.transform.position, this.transform.rotation);
+                    gc.PlayExplosionSound();
+                    Destroy(col.gameObject);
+                }
+                Destroy(gameObject);
             }
-            else {
-                Instantiate(explosionPrefab, this.transform.position, this.transform.rotation);
-                gc.PlayExplosionSound();
-                Destroy(col.gameObject);
-            }
-            Destroy(gameObject);
         }
-    }   
+    }
+    /*
+    void Update()
+    {
+        float yMax = Camera.main.orthographicSize;
+        float yMin = -Camera.main.orthographicSize;
+        float xMax = Camera.main.orthographicSize * Screen.width / Screen.height;
+        float xMin = -Camera.main.orthographicSize * Screen.width / Screen.height;
+        float x = this.transform.position.x;
+        float y = this.transform.position.y;
+        if (x > xMax || x < xMin || y > yMax || y < yMin)
+        {
+            Destroy(this);
+        }
+    }
+    */
 }

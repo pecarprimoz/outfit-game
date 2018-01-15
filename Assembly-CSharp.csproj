@@ -56,6 +56,7 @@
      <Compile Include="Assets\Assets\Scripts\Background\ScrollingBackground.cs" />
      <Compile Include="Assets\Assets\Scripts\Controllers\AIController.cs" />
      <Compile Include="Assets\Assets\Scripts\Controllers\AsteroidController.cs" />
+     <Compile Include="Assets\Assets\Scripts\Controllers\BOSSController.cs" />
      <Compile Include="Assets\Assets\Scripts\Controllers\DataController.cs" />
      <Compile Include="Assets\Assets\Scripts\Controllers\GameController.cs" />
      <Compile Include="Assets\Assets\Scripts\Controllers\PickupController.cs" />

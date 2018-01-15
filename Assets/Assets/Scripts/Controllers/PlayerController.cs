@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
-    public float speedRotate;
-    public float speedMove;
-    public float hoverSpeed;
-    public float timeSinceShot = 0.0f;
+    private float speedRotate = 3.8f;
+    private float speedMove = 4.2f;
+    private float hoverSpeed = 0.1f;
+    private float timeSinceShot = 0.0f;
     private float fireRate = 0.2f;
     private int playerHP;
 
@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     //If player collides with PickupDPS, reduce his fireRate
     public void reduceFireRate()
     {
-        if(fireRate>0.1f)
-            fireRate -= 0.1f;
+        Debug.Log("Reduce");
+        fireRate -= 0.05f;
     }
     public int getPlayerHP()
     {
@@ -68,6 +68,12 @@ public class PlayerController : MonoBehaviour
         {
             transform.Rotate(transform.forward * (-1 * speedRotate));
         }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            rb2D.velocity = Vector3.zero;
+            rb2D.angularVelocity = 0.0f;
+            transform.position -= transform.up * speedMove/4 * Time.deltaTime;
+        }
         if (Input.GetKey(KeyCode.S) && Time.time > timeSinceShot)
         {
             this.GetComponent<BoxCollider2D>().enabled = true;
@@ -91,6 +97,7 @@ public class PlayerController : MonoBehaviour
     }
     void Fire()
     {
+        Debug.Log(fireRate);
         audioSource.PlayOneShot(audioShoot,1.0f);
         var bullet = (GameObject)Instantiate(
             bulletPrefab,

@@ -204,7 +204,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -231,7 +231,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -372,10 +372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e970c2623fe8642b61dc1123973445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedRotate: 3.8
-  speedMove: 4.2
-  hoverSpeed: 0.1
-  timeSinceShot: 0
   bulletPrefab: {fileID: 1253087181345586, guid: fef28c2307e36c442bc3cfab07dce7aa,
     type: 2}
   explosionPrefab: {fileID: 1065141428921726, guid: d45cb09231dc09d4187fec5a6029ea6a,
